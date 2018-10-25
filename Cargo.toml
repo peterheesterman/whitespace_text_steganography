@@ -1,6 +1,6 @@
 [package]
 name = "whitespace_text_steganography"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Peter Heesterman <heesterman.peter@gmail.com>"]
 
 description = "Using whitespace to hide text in other text using steganography"
