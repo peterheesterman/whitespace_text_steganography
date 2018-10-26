@@ -23,16 +23,32 @@ and import using ```extern crate```:
 ```rust
 extern crate whitespace_text_steganography;
 
+use std::error::Error;
+use std::fs::File;
+use std::io::prelude::*;
+
 use whitespace_text_steganography::{ hide, reveal };
 
 fn run () {
     let payload_path = "./text/payload.txt";
     let carrier_path = "./text/carrier.txt";
+    let output_path = "./hidden.txt";
 
     let text = hide(payload_path, carrier_path);
     println!(text);
 
-    // reveal coming soon...
+    let mut file = match File::create(output_path) {
+        Err(why) => panic!("couldn't create because: {}", why.description()),
+        Ok(file) => file,
+    };
+    
+    match file.write_all(text.as_bytes()) {
+        Err(why) => panic!("couldn't write because: {}", why.description()),
+        Ok(_) => (),
+    }
+
+    let hidden_message = reveal(output_path);
+    println!(hidden_message);
 }
 ```
 

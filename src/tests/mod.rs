@@ -11,8 +11,7 @@ fn hide_payload() {
 
 #[test]
 fn reveal_hidden_text() {
-    let carrier_path = "./src/tests/hidden.txt";
-
+    let carrier_path = "./src/tests/texts/hidden.txt";
     let text = reveal(carrier_path);
-    assert_eq!(text, "revealed");
+    assert_eq!(text, "1\n2");
 }
