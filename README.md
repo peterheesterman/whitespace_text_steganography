@@ -1,12 +1,11 @@
-# (Work in progress)
 
 # whitespace_text_steganography
 
 (Zero width whitespace steganography)
 
-This repo is a module for the commandline tool [`steg`](https://github.com/peterheesterman/steg) but can also be used independently
+This repo is a module for the commandline tool [`steg`](https://github.com/peterheesterman/steg) but can also be used independently.
 
-It takes paths to two text files and hide the contents of the first in the second one, it can then reveal the hidden text again.
+It takes paths to two text files and hides the contents of the first in the second one, it can then reveal the hidden text again.
 
 
 ### Usage
@@ -17,6 +16,8 @@ Add the following to the Cargo.toml in your project:
 [dependencies]
 whitespace_text_steganography = "*"
 ```
+
+Add a `payload.txt` and a `carrier.txt` to a folder called `texts`.
 
 and import using ```extern crate```:
 
@@ -29,13 +30,14 @@ use std::io::prelude::*;
 
 use whitespace_text_steganography::{ hide, reveal };
 
-fn run () {
-    let payload_path = "./text/payload.txt";
-    let carrier_path = "./text/carrier.txt";
+fn main () {
+    let payload_path = "./texts/payload.txt";
+    let carrier_path = "./texts/carrier.txt";
     let output_path = "./hidden.txt";
 
     let text = hide(payload_path, carrier_path);
-    println!(text);
+    println!("\n-------{}------", output_path);
+    println!("{}", text);
 
     let mut file = match File::create(output_path) {
         Err(why) => panic!("couldn't create because: {}", why.description()),
@@ -47,13 +49,9 @@ fn run () {
         Ok(_) => (),
     }
 
+    println!("\n--------The hidden message revealed---------");
+
     let hidden_message = reveal(output_path);
-    println!(hidden_message);
+    println!("{}", hidden_message);
 }
 ```
-
-## Documentation
-
-Read it. . .(coming soon)
-
-
