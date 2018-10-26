@@ -12,8 +12,8 @@ pub fn hide<'a>(payload_path: &str, carrier_path: &'a str) -> String {
     hider::interleave(payload, carrier)
 }
 
-pub fn reveal(_carrier_path: &str) -> &str {
-    //  use std::char;
-    //  char::from_u32(intValue)
-    "revealed"
+pub fn reveal(carrier_path: &str) -> String {
+    let carrier = file_helpers::get_file_string(carrier_path);
+
+    revealer::extract(carrier)
 }
