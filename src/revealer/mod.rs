@@ -37,7 +37,6 @@ pub fn extract(carrier: String) -> String {
     payload.to_string()
 }
 
-
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -46,11 +45,14 @@ mod tests {
     fn can_identify_zero_width_whitespace() {
         assert!(is_zero_width_whitespace_character('​'))
     }
-    
+
     #[test]
     fn can_group_white_space() {
         let whitespace_infested_text = String::from("W​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​h​​​​​​​​​​o​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​so list to hunt");
         let whitespace_groups_expected: Vec<u32> = vec![49, 10, 50];
-        assert_eq!(get_whitespace_groups(whitespace_infested_text), whitespace_groups_expected);
+        assert_eq!(
+            get_whitespace_groups(whitespace_infested_text),
+            whitespace_groups_expected
+        );
     }
 }
