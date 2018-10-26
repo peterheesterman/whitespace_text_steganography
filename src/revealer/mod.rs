@@ -2,6 +2,10 @@ extern crate regex;
 
 use std::char;
 
+fn is_zero_width_whitespace_character(candidate: char) -> bool {
+    candidate == '​'
+}
+
 pub fn extract(carrier: String) -> String {
     let mut whitespace_groups: Vec<u32> = Vec::new();
 
@@ -9,12 +13,10 @@ pub fn extract(carrier: String) -> String {
     carrier.next();
 
     let mut character = carrier.next().unwrap();
-    while character == '​' {
+    while is_zero_width_whitespace_character(character) {
         let mut count: u32 = 0;
-        while character == '​' {
-            if character == '​' {
-                count = count + 1;
-            }
+        while is_zero_width_whitespace_character(character) {
+            count = count + 1;
             character = carrier.next().unwrap();
         }
         whitespace_groups.push(count);
