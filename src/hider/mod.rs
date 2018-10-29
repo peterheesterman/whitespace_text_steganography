@@ -3,7 +3,7 @@ use std::iter;
 pub fn interleave(payload: String, carrier: String) -> String {
     let zero_width_whitespace_character = '​';
 
-    if carrier.len() < payload.len() {
+    if carrier.len() < payload.len() + 1 {
         // TODO: add error passing and use into steg
         panic!("The carrier is too short!");
     }
