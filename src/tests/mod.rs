@@ -15,3 +15,21 @@ fn reveal_hidden_text() {
     let text = reveal(carrier_path);
     assert_eq!(text, "1\n2");
 }
+
+#[test]
+#[should_panic]
+fn hide_same_size_should_fail() {
+    let payload_path = "./src/tests/texts/payload_match.txt";
+    let carrier_path = "./src/tests/texts/carrier_match.txt";
+
+    hide(payload_path, carrier_path);
+}
+
+#[test]
+fn hide_same_size_1_should_pass() {
+    let payload_path = "./src/tests/texts/payload_match.txt";
+    let carrier_path = "./src/tests/texts/carrier_match_plus.txt";
+
+    let text = hide(payload_path, carrier_path);
+    assert_eq!(text, "1\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}2\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}\u{200b}3");
+}
